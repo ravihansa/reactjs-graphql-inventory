@@ -29,3 +29,19 @@ export const getInventoryData = async () => {
         query: INVENTORY_DATA_QUERY,
     });
 };
+
+export const getCategoryData = async () => {
+    const CATEGORY_DATA_QUERY = `
+        query {
+            categories {
+                id
+                name
+                categoryKey
+            }
+        }
+    `;
+
+    return await api.post(`/`, {
+        query: CATEGORY_DATA_QUERY,
+    });
+};
