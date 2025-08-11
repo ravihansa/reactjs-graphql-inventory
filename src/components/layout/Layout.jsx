@@ -4,7 +4,7 @@ import SideNavbar from './sideNavbar/SideNavbar';
 import styles from './styles/Layout.module.css';
 
 const Layout = ({ children }) => {
-    const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
+    const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(true);
 
     const toggleSidebar = () => {
         setIsSidebarCollapsed(!isSidebarCollapsed);

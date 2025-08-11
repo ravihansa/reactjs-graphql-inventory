@@ -2,9 +2,7 @@ import React from 'react';
 import InventoryCard from './InventoryCard';
 import styles from '../styles/InventoryList.module.css';
 
-const InventoryList = ({ data, loading }) => {
-
-    if (loading) return <div>Loading inventory...</div>;
+const InventoryList = ({ data }) => {
 
     return (
         <div className={styles.inventoryGrid}>

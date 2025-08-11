@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import InventoryList from '../components/InventoryList';
 import { getInventoryData } from '../services/api';
+import Loader from '../components/common/loader/Loader';
 
 const InventoryPage = () => {
 
@@ -25,7 +26,8 @@ const InventoryPage = () => {
 
     return (
         <div className="inventory-page">
-            <InventoryList data={inventory} loading={loading} />
+            {loading && <Loader size="medium" color="#2c3e50" />}
+            <InventoryList data={inventory} />
         </div>
     );
 };

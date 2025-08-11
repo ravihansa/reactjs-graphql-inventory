@@ -31,7 +31,7 @@ const SideNavbar = ({ isCollapsed, toggleCollapse }) => {
         loadCategories();
     }, []);
 
-    if (loading) return <div className={styles.sideNavbar}>Loading...</div>;
+    if (loading && !isCollapsed) return <div className={styles.sideNavbar}>Loading...</div>;
 
     return (
         <nav className={`${styles.sideNavbar} ${isCollapsed ? styles.collapsed : ''}`}>
