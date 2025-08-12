@@ -5,9 +5,9 @@
     padding: 20px;
 }
 
-.loading {
-    padding: 40px;
+.noResults {
     text-align: center;
+    padding: 40px;
     font-size: 1.2rem;
     color: #666;
 }

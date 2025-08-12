@@ -1,0 +1,9 @@
+.pageContainer {
+    padding: 20px;
+}
+
+.searchSection {
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: center;
+}
