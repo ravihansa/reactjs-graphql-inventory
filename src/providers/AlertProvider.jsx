@@ -2,12 +2,12 @@ import React from 'react';
 import { Toaster, toast } from 'react-hot-toast';
 
 export const useAlerts = () => {
-    const showSuccess = (message) => {
-        toast.success(message);
+    const showSuccess = (message, options = {}) => {
+        toast.success(message, options);
     };
 
-    const showError = (message) => {
-        toast.error(message);
+    const showError = (message, options = {}) => {
+        toast.error(message, options);
     };
 
     return {
