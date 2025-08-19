@@ -7,7 +7,7 @@ const SearchBar = ({ onSearch, placeholder = 'Search products...' }) => {
     useEffect(() => {
         const timer = setTimeout(() => {
             onSearch(searchTerm);
-        }, 300);
+        }, 500);
 
         return () => clearTimeout(timer);
     }, [searchTerm, onSearch]);

@@ -45,3 +45,25 @@ export const getCategoryData = async () => {
         query: CATEGORY_DATA_QUERY,
     });
 };
+
+export const searchInventoryData = async (productName) => {
+    const INVENTORY_DATA_QUERY = `
+        query {
+            productsByName(name: "${productName}") {
+                id
+                brand
+                name
+                price
+                isActive
+                inventory {
+                    quantity
+                    status
+                }
+            }
+        }
+    `;
+
+    return await api.post(`/`, {
+        query: INVENTORY_DATA_QUERY
+    });
+};
