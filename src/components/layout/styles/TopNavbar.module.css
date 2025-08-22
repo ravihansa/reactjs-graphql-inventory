@@ -54,3 +54,14 @@
     justify-content: center;
     font-weight: bold;
 }
+
+.cartIcon {
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.separator {
+    border-right: 1px solid white;
+    height: 30px;
+    margin-right: 10px;
+}

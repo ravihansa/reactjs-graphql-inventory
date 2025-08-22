@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef, } from 'react';
+import { useCart } from '../contexts/CartContext';
 import { useAlerts } from '../providers/AlertProvider';
 import Loader from '../components/common/loader/Loader';
 import InventoryList from '../components/InventoryList';
@@ -14,6 +15,7 @@ const InventoryPage = () => {
     const [filteredInventory, setFilteredInventory] = useState([]);
     const { successAlert, errorAlert } = useAlerts();
     const timeoutRef = useRef(null);
+    const { addToCart } = useCart();
 
     const loadInventory = async () => {
         try {
@@ -87,13 +89,35 @@ const InventoryPage = () => {
         }, 500);
     };
 
+    const handleAddToCart = (item) => {
+        if (item.inventory?.quantity > 0) {
+            const { id, name, brand, price } = item;
+            addToCart({ id, name, brand, price });
+            // Decrease the inventory and  filteredInventory quantity
+            setInventory(prev =>
+                prev.map(p =>
+                    p.id === item.id
+                        ? { ...p, inventory: { ...p.inventory, quantity: p.inventory.quantity - 1 } }
+                        : p
+                )
+            );
+            setFilteredInventory(prev =>
+                prev.map(p =>
+                    p.id === item.id
+                        ? { ...p, inventory: { ...p.inventory, quantity: p.inventory.quantity - 1 } }
+                        : p
+                )
+            );
+        }
+    };
+
     return (
         <div className={styles.pageContainer}>
             {loading && <Loader size="medium" color="#2c3e50" />}
             <div className={styles.searchSection}>
                 <SearchBar onSearch={debouncedSearch} placeholder="Product name..." />
             </div>
-            <InventoryList data={filteredInventory} />
+            <InventoryList data={filteredInventory} onAddToCart={handleAddToCart} />
         </div>
     );
 };
