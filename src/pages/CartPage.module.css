@@ -1,0 +1,143 @@
+.cartContainer {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+h2 {
+    margin-bottom: 20px;
+    text-align: center;
+    color: #2c3e50;
+}
+
+.cartTable {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.cartRow {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+    align-items: center;
+    padding: 12px 16px;
+    border-bottom: 1px solid #eaeaea;
+}
+
+.header {
+    font-weight: bold;
+    background: #f7f7f7;
+}
+
+.product {
+    display: flex;
+    flex-direction: column;
+}
+
+.name {
+    font-weight: 600;
+    font-size: 15px;
+    color: #333;
+}
+
+.brand {
+    font-size: 13px;
+    color: #777;
+}
+
+.removeBtn {
+    background: transparent;
+    border: none;
+    color: #e74c3c;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.removeBtn:hover {
+    text-decoration: underline;
+}
+
+.footer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: 20px;
+    gap: 15px;
+}
+
+.total {
+    font-size: 18px;
+    font-weight: bold;
+    margin-right: auto;
+    color: #2c3e50;
+}
+
+.clearBtn {
+    background: #e74c3c;
+    color: #fff;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.clearBtn:hover {
+    background: #c0392b;
+}
+
+.checkoutBtn {
+    background: #2ecc71;
+    color: #fff;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.checkoutBtn:hover {
+    background: #27ae60;
+}
+
+.empty {
+    text-align: center;
+    margin-top: 100px;
+    font-size: 18px;
+    color: #555;
+}
+
+.quantityControls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.quantityControls button {
+    width: 28px;
+    height: 28px;
+    border: 1px solid #ccc;
+    background: #f7f7f7;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    line-height: 1;
+}
+
+.quantityControls button:hover {
+    background: #e0e0e0;
+}
+
+.quantityControls span {
+    min-width: 20px;
+    text-align: center;
+    font-weight: 500;
+}
+
+.quantityControls button:disabled {
+    background: #eee;
+    color: #aaa;
+    cursor: not-allowed;
+    border: 1px solid #ddd;
+}

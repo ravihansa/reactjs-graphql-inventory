@@ -3,6 +3,7 @@ import { useCart } from '../contexts/CartContext';
 import { useAlerts } from '../providers/AlertProvider';
 import Loader from '../components/common/loader/Loader';
 import InventoryList from '../components/InventoryList';
+import { useInventory } from '../contexts/InventoryContext';
 import SearchBar from '../components/common/searchBar/SearchBar';
 import { getInventoryData, searchInventoryData } from '../services/api';
 import styles from './InventoryPage.module.css';
@@ -11,11 +12,12 @@ import styles from './InventoryPage.module.css';
 const InventoryPage = () => {
 
     const [loading, setLoading] = useState(true);
-    const [inventory, setInventory] = useState([]);
+    // const [inventory, setInventory] = useState([]);
     const [filteredInventory, setFilteredInventory] = useState([]);
     const { successAlert, errorAlert } = useAlerts();
     const timeoutRef = useRef(null);
     const { addToCart } = useCart();
+    const { inventory, setInventory, decreaseStock } = useInventory();
 
     const loadInventory = async () => {
         try {
@@ -35,7 +37,12 @@ const InventoryPage = () => {
     };
 
     useEffect(() => {
-        loadInventory();
+        if (!inventory.length) {
+            loadInventory();
+        } else {
+            setFilteredInventory(inventory);
+            setLoading(false);
+        }
         return () => {
             if (timeoutRef.current) {
                 clearTimeout(timeoutRef.current);
@@ -94,13 +101,7 @@ const InventoryPage = () => {
             const { id, name, brand, price } = item;
             addToCart({ id, name, brand, price });
             // Decrease the inventory and  filteredInventory quantity
-            setInventory(prev =>
-                prev.map(p =>
-                    p.id === item.id
-                        ? { ...p, inventory: { ...p.inventory, quantity: p.inventory.quantity - 1 } }
-                        : p
-                )
-            );
+            decreaseStock(item.id, 1);
             setFilteredInventory(prev =>
                 prev.map(p =>
                     p.id === item.id
