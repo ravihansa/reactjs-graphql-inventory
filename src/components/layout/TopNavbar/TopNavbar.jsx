@@ -1,11 +1,11 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useCart } from './../../../contexts/CartContext';
+import { useStore } from './../../../contexts/StoreContext';
 import styles from './../styles/TopNavbar.module.css';
 
 
 const TopNavbar = ({ toggleSidebar }) => {
-    const { cart } = useCart();
+    const { cart } = useStore();
     const navigate = useNavigate();
 
     return (

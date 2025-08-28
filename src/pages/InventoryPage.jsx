@@ -1,9 +1,8 @@
 import React, { useEffect, useState, useRef, } from 'react';
-import { useCart } from '../contexts/CartContext';
+import { useStore } from '../contexts/StoreContext';
 import { useAlerts } from '../providers/AlertProvider';
 import Loader from '../components/common/loader/Loader';
 import InventoryList from '../components/InventoryList';
-import { useInventory } from '../contexts/InventoryContext';
 import SearchBar from '../components/common/searchBar/SearchBar';
 import { getInventoryData, searchInventoryData } from '../services/api';
 import styles from './InventoryPage.module.css';
@@ -16,8 +15,7 @@ const InventoryPage = () => {
     const [filteredInventory, setFilteredInventory] = useState([]);
     const { successAlert, errorAlert } = useAlerts();
     const timeoutRef = useRef(null);
-    const { addToCart } = useCart();
-    const { inventory, setInventory, decreaseStock } = useInventory();
+    const { inventory, setInventory, addToCart } = useStore();
 
     const loadInventory = async () => {
         try {
@@ -100,8 +98,7 @@ const InventoryPage = () => {
         if (item.inventory?.quantity > 0) {
             const { id, name, brand, price } = item;
             addToCart({ id, name, brand, price });
-            // Decrease the inventory and  filteredInventory quantity
-            decreaseStock(item.id, 1);
+            // Decrease the filteredInventory quantity as well
             setFilteredInventory(prev =>
                 prev.map(p =>
                     p.id === item.id
