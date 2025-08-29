@@ -1,6 +1,6 @@
 import React from 'react';
 import { useStore } from '../contexts/StoreContext';
-import styles from "./CartPage.module.css";
+import styles from "./styles/CartPage.module.css";
 
 const CartPage = () => {
     const { cart, inventory, increaseQuantity, decreaseQuantity, removeFromCart, clearCart } = useStore();
