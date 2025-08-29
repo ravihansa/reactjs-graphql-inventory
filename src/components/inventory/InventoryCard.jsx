@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '../styles/InventoryCard.module.css';
+import styles from './styles/InventoryCard.module.css';
 
 const InventoryCard = ({ item, onAddToCart }) => {
     const statusColor = item.inventory?.status === true ? 'green' : 'red';

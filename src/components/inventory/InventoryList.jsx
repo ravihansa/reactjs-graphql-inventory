@@ -1,6 +1,6 @@
 import React from 'react';
 import InventoryCard from './InventoryCard';
-import styles from '../styles/InventoryList.module.css';
+import styles from './styles/InventoryList.module.css';
 
 const InventoryList = ({ data, onAddToCart }) => {
 
