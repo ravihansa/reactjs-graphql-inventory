@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef, } from 'react';
+import { useStore } from '../contexts/StoreContext';
 import { useAlerts } from '../providers/AlertProvider';
 import Loader from '../components/common/loader/Loader';
 import InventoryList from '../components/InventoryList';
@@ -10,10 +11,11 @@ import styles from './InventoryPage.module.css';
 const InventoryPage = () => {
 
     const [loading, setLoading] = useState(true);
-    const [inventory, setInventory] = useState([]);
+    // const [inventory, setInventory] = useState([]);
     const [filteredInventory, setFilteredInventory] = useState([]);
     const { successAlert, errorAlert } = useAlerts();
     const timeoutRef = useRef(null);
+    const { inventory, setInventory, addToCart } = useStore();
 
     const loadInventory = async () => {
         try {
@@ -33,7 +35,12 @@ const InventoryPage = () => {
     };
 
     useEffect(() => {
-        loadInventory();
+        if (!inventory.length) {
+            loadInventory();
+        } else {
+            setFilteredInventory(inventory);
+            setLoading(false);
+        }
         return () => {
             if (timeoutRef.current) {
                 clearTimeout(timeoutRef.current);
@@ -87,13 +94,28 @@ const InventoryPage = () => {
         }, 500);
     };
 
+    const handleAddToCart = (item) => {
+        if (item.inventory?.quantity > 0) {
+            const { id, name, brand, price } = item;
+            addToCart({ id, name, brand, price });
+            // Decrease the filteredInventory quantity as well
+            setFilteredInventory(prev =>
+                prev.map(p =>
+                    p.id === item.id
+                        ? { ...p, inventory: { ...p.inventory, quantity: p.inventory.quantity - 1 } }
+                        : p
+                )
+            );
+        }
+    };
+
     return (
         <div className={styles.pageContainer}>
             {loading && <Loader size="medium" color="#2c3e50" />}
             <div className={styles.searchSection}>
                 <SearchBar onSearch={debouncedSearch} placeholder="Product name..." />
             </div>
-            <InventoryList data={filteredInventory} />
+            <InventoryList data={filteredInventory} onAddToCart={handleAddToCart} />
         </div>
     );
 };

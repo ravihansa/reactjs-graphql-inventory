@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from '../styles/InventoryCard.module.css';
 
-const InventoryCard = ({ item }) => {
+const InventoryCard = ({ item, onAddToCart }) => {
     const statusColor = item.inventory?.status === true ? 'green' : 'red';
 
     return (
@@ -28,8 +28,13 @@ const InventoryCard = ({ item }) => {
             </div>
             <div className={styles.cardFooter}>
                 <button className={styles.actionButton}>
-                    View Details</button>
-                <button className={`${styles.actionButton} ${styles.primary}`}>
+                    View Details
+                </button>
+                <button
+                    className={`${styles.actionButton} ${styles.primary}`}
+                    onClick={() => onAddToCart(item)}
+                    disabled={!item.inventory?.status || item.inventory?.quantity <= 0}
+                >
                     Add to Cart
                 </button>
             </div>
