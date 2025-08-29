@@ -2,10 +2,10 @@ import React, { useEffect, useState, useRef, } from 'react';
 import { useStore } from '../contexts/StoreContext';
 import { useAlerts } from '../providers/AlertProvider';
 import Loader from '../components/common/loader/Loader';
-import InventoryList from '../components/inventory/InventoryList';
+import InventoryList from '../components/InventoryList';
 import SearchBar from '../components/common/searchBar/SearchBar';
 import { getInventoryData, searchInventoryData } from '../services/api';
-import styles from './styles/InventoryPage.module.css';
+import styles from './InventoryPage.module.css';
 
 
 const InventoryPage = () => {
